@@ -146,5 +146,9 @@ plot(forecast_Regression_ARMA_residential, col=1, include=12)
 lines(mobilityResidential_test, type="l",col=2)
 
 
-
+#summary
+c = cbind(forecast_Regression_ARMA_retail$mean, forecast_Regression_ARMA_grocery$mean, forecast_Regression_ARMA_parks$mean,forecast_Regression_ARMA_transit$mean, forecast_Regression_ARMA_workplaces$mean, forecast_Regression_ARMA_residential$mean)
+colnames(c) <- c("retail","grocery","parks","transit","workplaces","residential")
+write.csv(c, 'forecast.csv')
+c
 
