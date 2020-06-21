@@ -1,16 +1,18 @@
-### Problem Statement
-1. How past policies affect mobility across six categories 
+# Welcome to the Project Repository of “A Team Has No Name”
+
+## Project Summary
+This project researched on how past policies affect mobility across below six categories, and help communities with future policy makings by providing a pipline to mimic possible effects on mobilities caused by new policies. 
 * Retail and recreation
 * Grocery and pharmacy
 * Parks
 * Transit stations
 * Workplaces
 * Residential
-2. Help communities with future policy makings
+
+## You will first see the following items:
 
 
-
-
+By Jenny Zhen, Li Cao and Yuyang Zhang. All rights reserved.
 
 
 #### 1st Meeting 6/14/20
