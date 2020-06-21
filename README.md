@@ -5,11 +5,11 @@ This project researched on how past policies affect mobility across six categori
 
 
 ## You will see the following items:
-* featureEngineering folder
-* clustering folder
-* Arimax folder
-* BayesianModel folder
-* pipeline folder
+* *[featureEngineering](featureEngineering)* folder
+* *[clustering](clustering)* folder
+* *[ArimaxModel](ArimaxModel)* folder
+* *[BayesianModel](BayesianModel)* folder
+* *[pipeline](pipeline)* folder
 * *[visualization](visualization)* folder
 
 
