@@ -10,25 +10,12 @@ This project researched on how past policies affect mobility across below six ca
 * Residential
 
 ## You will see the following items:
-* Park_imputation.Rmd 
-* State Clustering.ipynb
-* PolicyClustering.ipynb
-
-
+* featureEngineering folder
+* clustering folder
 * Arimax folder
+* BayesianModel folder
 * pipeline folder
 * visualization folder
-
-* visualizations_ArimaX.twb
-* Policy impact on mobility.pptx
-
-
-
-
-
-
-
-
 
 
 
