@@ -1,33 +1,13 @@
-### 6/15/20
-
-1. Plot with mobility pattern and date of measure taken (parameters: mobility category, measure category, timeframe)
-2. plot with cases and mobility pattern
-
-
-
-### Paper
-
-- Predict case counts with mobility pattern in China (glm model with time-series) https://science.sciencemag.org/content/368/6490/493
-- 
-
-
-
-
-
 ### Problem Statement
+1. How past policies affect mobility across six categories 
+* Retail and recreation
+* Grocery and pharmacy
+* Parks
+* Transit stations
+* Workplaces
+* Residential
+2. Help communities with future policy makings
 
-1. Estimate future mobility pattern with policy interventions
-2. Predict cases with future mobility pattern 
-3. Add onto policy interventions and see prediction changes
-
-
-
-### Note
-
-1. parks imputation (time-series prediction or previous-day)
-   1. parks have peak
-2. deaths, confirmed cases.diff()
-3. 
 
 
 
