@@ -1,0 +1,62 @@
+---
+title: "Untitled"
+author: "Li Cao"
+date: "6/17/2020"
+output: html_document
+---
+```{r}
+library(dplyr)
+mobile<-read.csv("covid19_us_summary 1.csv")
+mobile
+DE<-mobile[which(mobile$a_state=="DE"),]
+ID<-mobile[which(mobile$a_state=="ID"),]
+ND<-mobile[which(mobile$a_state=="ND"),]
+DE
+
+```
+
+```{r}
+library(imputeTS)
+
+plot(DE$parks,type="l",main="DE parks")
+plotNA.distribution(DE$park,main = "NA distribution for parks")
+legend("topright", c("DE parks"),cex = 0.75)
+
+DE.imp<-na_kalman(DE$parks,model = "auto.arima")
+plotNA.imputations(DE$parks, DE.imp,main = "Visualization Imputed Value for DE parks")
+
+```
+
+```{r}
+plot(ID$parks,type="l",main="ID parks")
+plotNA.distribution(ID$park,main = "NA distribution for parks")
+legend("topright", c("ID parks"),cex = 0.75)
+
+ID.imp<-na_kalman(ID$parks,model = "auto.arima")
+plotNA.imputations(ID$parks, ID.imp,main = "Visualization Imputed Value for ID parks")
+```
+
+```{r}
+plot(ND$parks,type="l",main="ND parks")
+plotNA.distribution(ND$park,main = "NA distribution for parks")
+legend("topright", c("ND parks"),cex = 0.75)
+
+ND.imp<-na_kalman(ND$parks,model = "auto.arima")
+plotNA.imputations(ND$parks, ND.imp,main = "Visualization Imputed Value for ID parks")
+```
+
+```{r}
+mobile[which(mobile$a_state=="DE"),]$parks=DE.imp
+mobile[which(mobile$a_state=="ND"),]$parks=ND.imp
+mobile[which(mobile$a_state=="ID"),]$parks=ID.imp
+
+
+write.csv(mobile,"covid19_us_summary_imputation.csv")
+```
+
+```{r}
+plotNA.distribution(mobile[which(mobile$a_state=="ID"),]$parks,main = "NA distribution for parks")
+```
+
+
+
