@@ -68,11 +68,11 @@ def weekend(df):
 def new_confirmed_log_shifted(df):
     new = df['confirmed_cases_state'].diff()
     new = new.fillna(np.nan)
-    new = np.log(new).replace(-np.inf,0)
+    # new = np.log(new).replace(-np.inf,0)
     new = new.fillna(0)
-    df['new_confirmed_log'] = new
-    df['new_confirmed_log'] = df['new_confirmed_log'].shift(7)
-    df['new_confirmed_log'] = df['new_confirmed_log'].fillna(0)
+    df['new_confirmed_shifted'] = new
+    df['new_confirmed_shifted'] = df['new_confirmed_shifted'].shift(7)
+    df['new_confirmed_shifted'] = df['new_confirmed_shifted'].fillna(0)
     df = df.drop('confirmed_cases_state', axis=1)
     return df
 
@@ -83,13 +83,28 @@ def policy_cumsum(df, policy_lst):
     return df
 
 
-def feature(df, policy_lst):
+def add_weights(df, state, mobility, policy_lst):
+    dict = {'retail_and_recreation': '/Users/Jenny/Desktop/COVID19/cleaned/policies_retail.csv'}
+    weights = pd.read_csv(dict[mobility])
+    weights = weights.set_index('POLICIES')[state]
+
+    for i in policy_lst:
+        try:
+            df[i] = df[i] * weights[i]
+        except:
+            continue
+    return df
+
+
+def feature(df, state, mobility, policy_lst):
     # add weekend indicator
     df = weekend(df)
     #confirmed cases
     df = new_confirmed_log_shifted(df)
     #cumsum of policy
     # df = policy_cumsum(df, policy_lst)
+    # weights
+    df = add_weights(df, state, mobility, policy_lst)
     return df
 
 
@@ -191,8 +206,8 @@ def model_predict(df, policy_lst, state, mobility,
     # add future
     df, df_unchanged = add_future(df, active, inactive, policy_lst)
     # feature engineering
-    df = feature(df, policy_lst)
-    df_unchanged = feature(df_unchanged, policy_lst)
+    df = feature(df, state, mobility, policy_lst)
+    df_unchanged = feature(df_unchanged, state, mobility, policy_lst)
 
     # prepare data for modeling
     train, pred, unchanged = labeled_unlabeled(df, mobility, df_unchanged)
@@ -215,9 +230,10 @@ def model_predict(df, policy_lst, state, mobility,
 
 
 # # # test
+# data = pd.read_csv('/Users/Jenny/Desktop/COVID19/cleaned/policy_mobiliy.csv')
 # cleaned = clean(data, policy_lst, 'IL', 'retail_and_recreation')
-# alldata = add_future(df=cleaned, new_active = ['END_MOV'], new_inactive=['CLDAYCR', 'CLMOVIE'], policy_lst=policy_lst)
-# alldata = feature(alldata, policy_lst)
+# alldata, alldata_unchanged = add_future(df=cleaned, new_active = ['END_MOV'], new_inactive=['CLDAYCR', 'CLMOVIE'], policy_lst=policy_lst)
+# alldata = feature(alldata, 'IL', 'retail_and_recreation', policy_lst)
 #
 # labeled, unlabeled = labeled_unlabeled(alldata, 'retail_and_recreation')
 # train, test = train_test_split(labeled, 7)
