@@ -10,8 +10,7 @@ This project researched on how past policies affect mobility across six categori
 * Arimax folder
 * BayesianModel folder
 * pipeline folder
-* visualization folder
-
+* *[visualization](visualization)* folder
 
 
 By Jenny Zhen, Li Cao and Yuyang Zhang. All rights reserved.
